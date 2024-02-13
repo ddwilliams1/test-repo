@@ -1,0 +1,8 @@
+UNIX: Navigating filesystem and managing files and access permissions:
+
+ls – list files and directories
+cp – copy files (work in progress)
+rm – remove files and directories (work in progress)
+mv – rename or move files and directories to another location
+chmod – change file/directory access permissions
+chown – change file/directory ownership
