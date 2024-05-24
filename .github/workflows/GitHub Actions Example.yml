@@ -1,27 +1,26 @@
 name: GitHub Actions Example
 
 on: 
-    create_release:
+    pull_request:
     branches:
       -dev
+      -uat-DW
       -main
 
 jobs:
   test:
-    name: Running Latest Release
+    name: New Pull Request
     runs-on: ubuntu-latest
     
-steps:
- -uses: actions/checkout@v1
- -name: Usen Node.js ${{ matrix.node-version }}
-  uses: actions/setup-node@v1
-  with:
-    node-version: ${{ matrix.node-version }}
-  -name: npm install
-   run: npm install
-       npm ci
-       npm run build --if-present
-       npm test
-    env:
-      CI: true
+    steps:
+    -uses: actions/checkout@v1
+    -name: Use Node.js ${{ matrix.node-version }}
+     uses: actions/setup-node@v1
+     with:
+       node-version: ${{ matrix.node-version }}
+    -name: Install
+     run: npm install
+    -name: Test
+     run: npm test
+      
    
