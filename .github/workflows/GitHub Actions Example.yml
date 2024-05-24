@@ -6,14 +6,19 @@ on:
       -dev
       -main
 
+jobs:
+  test:
+    name: Running Latest Release
+    runs-on: ubuntu-latest
+    
 steps:
  -uses: actions/checkout@v1
  -name: Usen Node.js ${{ matrix.node-version }}
-     uses: actions/setup-node@v1
-     with:
-      node-version: ${{ matrix.node-version }}
-  -name: npm install, build, and test
-     run: |
+  uses: actions/setup-node@v1
+  with:
+    node-version: ${{ matrix.node-version }}
+  -name: npm install
+   run: npm install
        npm ci
        npm run build --if-present
        npm test
