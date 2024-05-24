@@ -3,7 +3,7 @@
   with:
       Upload a Build Artifact.yml
     name: optional default is artifact
-      *.yml
+      *.*
     path: test-repo/.github/workflows
       The desired behavior if no files are found using the provided path.
 Available Options:
