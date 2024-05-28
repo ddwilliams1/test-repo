@@ -22,7 +22,7 @@ jobs:
         subject: 'New Issue Opened: ${{ github.event.issue.title }}'
         body: |
           A new issue has been opened in the repository:
-          Repository: ${{ github.repository }}
+          Repository: ${{ https://github.com/ddwilliams1/test-repo }}
           Issue Title: ${{ github.event.issue.title }}
           Issue Body: ${{ github.event.issue.body }}
           Issue URL: ${{ github.event.issue.html_url }}
