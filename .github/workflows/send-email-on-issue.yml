@@ -2,15 +2,15 @@ name: Send Email on Issue
 
 on:
   issues:
-    types: '[opened]'
+    types: [opened]
 
 jobs:
   send_email:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 'Checkout repository'
-      uses: 'actions/checkout@v3'
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
     - name: 'Send email'
       uses: 'ddwilliams1/action-send-mail@v3'
