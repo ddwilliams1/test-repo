@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Send email
-      uses: Derick.Williams1/action-send-mail@v3
+      uses: Derick.Williams1@nara.gov/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         server_port: 465
