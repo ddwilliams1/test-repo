@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v20
+      uses: actions/checkout@v6
 
     - name: 'Send email'
       uses: 'dawidd6/action-send-mail@v3'
