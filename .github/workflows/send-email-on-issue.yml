@@ -26,5 +26,5 @@ jobs:
           Issue Title: ${{ github.event.issue.title }}
           Issue Body: ${{ github.event.issue.body }}
           Issue URL: ${{ github.event.issue.html_url }}
-        to: Derick.Williams1@nara.gov,janice.cobb@nara.gov
+        to: Derick.Williams1@nara.gov
         from: ${{ secrets.EMAIL_USERNAME }}
