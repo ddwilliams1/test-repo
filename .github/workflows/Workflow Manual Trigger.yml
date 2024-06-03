@@ -7,6 +7,12 @@ on:
         description: 'Which environment to deploy to'
         required: true
         default: 'Production'
+        type: choice
+        options:
+          - Production
+          - Development
+          - CAT
+          - UAT
 
 jobs:
   build:
