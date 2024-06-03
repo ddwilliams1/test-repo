@@ -21,17 +21,17 @@ jobs:
       run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
     - name: Add Node.js to PATH
-      run: echo "/home/runner/work/{ddwilliams1}/{test-repo}" >> $GITHUB_PATH
+      run: echo "/home/runner/work/ddwilliams1/test-repo" >> $GITHUB_PATH
 
     - name: Display directory structure
-      run: ls -la /home/runner/work/{ddwilliams1}/{test-repo}/{.github}/{workflows}
+      run: ls -la /home/runner/work/ddwilliams1/test-repo/.github/workflows
 
     - name: Set execute permissions on script
-      run: chmod +x /home/runner/work/{ddwilliams1}/{test-repo}/{.github}/{workflows}/package.json
+      run: chmod +x /home/runner/work/ddwilliams1/test-repo/.github/workflows/package.json
 
     - name: Run a script
       run: ./package.json
-      working-directory: /home/runner/work/{ddwilliams1}/{test-repo}/{.github}/{workflows}
+      working-directory: /home/runner/work/ddwilliams1/test-repo/.github/workflows
 
     - name: Set up Node.js 20.x
       uses: actions/setup-node@v3
