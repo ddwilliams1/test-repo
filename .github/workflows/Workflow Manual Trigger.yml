@@ -24,3 +24,37 @@ jobs:
 
     - name: Run a one-line script
       run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
+
+    - name: Send email notification
+      if: ${{ failure() }}
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.example.com
+        server_port: 587
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: Build Failed - ${{ github.repository }}
+        to: derick.williams1@nara.gov
+        from: derick.williams1@nara.gov
+        body: |
+          The build for ${{ github.repository }} has failed.
+          Branch: ${{ github.ref }}
+          Commit: ${{ github.sha }}
+          Please check the logs for more details.
+
+    - name: Send email notification
+      if: ${{ success() }}
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.example.com
+        server_port: 587
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: Build Succeeded - ${{ github.repository }}
+        to: derick.williams1@nara.gov
+        from: derick.williams1@nara.gov
+        body: |
+          The build for ${{ github.repository }} has succeeded.
+          Branch: ${{ github.ref }}
+          Commit: ${{ github.sha }}
+          Please check the logs for more details.     
