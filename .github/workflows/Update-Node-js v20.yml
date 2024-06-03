@@ -24,7 +24,7 @@ jobs:
       run: echo "/home/runner/work/{ddwilliams1}/{test-repo}" >> $GITHUB_PATH
 
     - name: Display directory structure
-      run: ls -la /home/runner/work/{ddwilliams1}/{test-repo}
+      run: ls -la /home/runner/work/{ddwilliams1}/{test-repo}/{.github}/{workflows}
 
     - name: Set execute permissions on script
       run: chmod +x /home/runner/work/{ddwilliams1}/{test-repo}/{.github}/{workflows}/package.json
