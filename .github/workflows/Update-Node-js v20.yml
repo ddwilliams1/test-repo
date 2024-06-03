@@ -21,7 +21,7 @@ jobs:
       run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
     - name: Add Node.js to PATH
-      run: echo "/path/to/node/bin" >> $GITHUB_PATH
+      run: echo ".github/workflows/package.json" >> $GITHUB_PATH
 
     - name: Set up Node.js 20.x
       uses: actions/setup-node@v3
