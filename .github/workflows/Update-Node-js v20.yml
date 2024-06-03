@@ -21,7 +21,7 @@ jobs:
       run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
     - name: Add Node.js to PATH
-      run: echo "https://github.com/ddwilliams1/test-repo/blob/main/.github/workflows/package.json" >> $GITHUB_PATH
+      run: echo "/home/runner/work/{ddwilliams1}/{test-repo}" >> $GITHUB_PATH
 
     - name: Set up Node.js 20.x
       uses: actions/setup-node@v3
@@ -30,9 +30,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      working-directory: ./
 
     - name: Run build
       run: npm run build
+      working-directory: ./
 
     - name: Run tests
       run: npm test
+      working-directory: ./
