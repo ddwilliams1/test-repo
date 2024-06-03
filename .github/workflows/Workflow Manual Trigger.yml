@@ -22,6 +22,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Display directory structure
+      run: ls -la /home/runner/work/github.com/ddwilliams1/test-repo/tree/main/.github/workflows
+
+    - name: Run a script
+      run: ./package.json
+      working-directory: /home/runner/work/{repository-name}/{repository-name}
+
     - name: Run a one-line script
       run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
 
