@@ -8,11 +8,16 @@ on:
     branches:
       - main
   workflow_dispatch:
-  type: choice
+    inputs:
+      environment:
+        description: 'What do you wnat to do'
+        required: true
+        default: 'Production'
+        type: choice
         options:
-          - Re-run
-          - Cancel
-          - Execute
+          - Re-start Action
+          - Pause Action
+          - Cancel Action
 
 jobs:
   build:
