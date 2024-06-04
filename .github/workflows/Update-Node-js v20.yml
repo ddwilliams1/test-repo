@@ -8,6 +8,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+  type: choice
+        options:
+          - Re-run
+          - Cancel
+          - Execute
 
 jobs:
   build:
