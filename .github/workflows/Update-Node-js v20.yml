@@ -15,10 +15,9 @@ on:
         default: 'Production'
         type: choice
         options:
-          - Re-run
           - CAT
           - UAT
-          - Production
+          - PRODUCTION
 
 jobs:
   build:
@@ -37,42 +36,8 @@ jobs:
     - name: Display directory structure
       run: ls -la /home/runner/work/test-repo/*
 
-    - name: Send email notification
-      if: ${{ success() }}
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.gmail.com
-        server_port: 587
-        username: ${{ secrets.SMTP_USERNAME }}
-        password: ${{ secrets.SMTP_PASSWORD }}
-        subject: Repository List Succeeded - ${{ github.repository }}
-        to: derick.williams1@nara.gov
-        from: notifications@github.com
-        body: |
-          The build for ${{ github.repository }} has succeeded.
-          Branch: ${{ github.ref }}
-          Commit: ${{ github.sha }}
-          Please check the logs for more details.
-
-    - name: Send email notification
-      if: ${{ failure() }}
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.gmail.com
-        server_port: 587
-        username: ${{ secrets.SMTP_USERNAME }}
-        password: ${{ secrets.SMTP_PASSWORD }}
-        subject: Build Failed - ${{ github.repository }}
-        to: derick.williams1@nara.gov
-        from: notifications@github.com
-        body: |
-          The build for ${{ github.repository }} has failed.
-          Branch: ${{ github.ref }}
-          Commit: ${{ github.sha }}
-          Please check the logs for more details.
-
-    #- name: Set execute permissions on script
-     # run: chmod +x /home/runner/work/ddwilliams1/test-repo/.github/workflows/package.json
+    - name: Set execute permissions on script
+      run: chmod 777 /home/runner/work/ddwilliams1/test-repo/.github/workflows/package.json
 
     #- name: Run a script
      # run: ./package.json
