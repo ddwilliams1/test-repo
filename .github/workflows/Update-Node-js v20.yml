@@ -34,10 +34,10 @@ jobs:
       run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH
 
     - name: Display directory structure
-      run: ls -la /home/runner/work/test-repo/*
+      run: ls -la /home/runner/work/test-repo/.github/*
 
     - name: Set execute permissions on script
-      run: chmod 777 package.json
+      run: chmod 777 ./package.json
 
     #- name: Run a script
      # run: ./package.json
