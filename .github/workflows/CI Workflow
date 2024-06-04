@@ -24,6 +24,7 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      working-directory:  /home/runner/work/ddwilliams1/test-repo/.github
 
     - name: Run build
       run: npm run build
