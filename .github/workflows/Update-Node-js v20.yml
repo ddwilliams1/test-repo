@@ -41,7 +41,7 @@ jobs:
 
     - name: Run a script
       run: ./package.json
-      working-directory: /home/runner/work/test-repo/.github
+      working-directory: /home/runner/work/test-repo
 
     - name: Set up Node.js 20.x
       uses: actions/setup-node@v3
