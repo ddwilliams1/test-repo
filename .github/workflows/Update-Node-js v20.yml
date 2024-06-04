@@ -37,7 +37,7 @@ jobs:
       run: ls -la /home/runner/work/test-repo/*
 
     - name: Set execute permissions on script
-      run: chmod 777 /home/runner/work/test-repo/.github/workflows/package.json
+      run: chmod 777 /home/runner/work/test-repo/package.json
 
     #- name: Run a script
      # run: ./package.json
