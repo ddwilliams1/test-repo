@@ -3,7 +3,7 @@ name: Tag and Release Workflow
 on:
 	pull_request:
 	types:
-		- open
+		- closed
 
 jobs:
 	release:
@@ -22,8 +22,8 @@ jobs:
 		run: npm run build
 		- name: Set up Git
 		run: |
-			git config user.name "Yout GitHub User name"
-			git config user.email "Your GitHub User email"
+			git config user.name "ddwilliams1"
+			git config user.email "derick.williams1@nara.gov"
 		- name: Get tag
 		id: get_tag
 		run: |
@@ -49,6 +49,6 @@ jobs:
 			release_name: Release ${{ steps.get_tag.outputs.version }}
 			body_path: ./release_notes.md
 			draft: false
-			prerelease: false
+			prerelease: true
 		- name: Delete release_notes file
 		run: rm release_notes.md
