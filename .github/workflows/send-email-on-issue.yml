@@ -21,7 +21,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     
     - name: Send email
-      uses: dawidd6/action-send-mail@v3
+      uses: ddwilliams1/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         server_port: 465
