@@ -27,7 +27,7 @@ jobs:
 
     - name: Run a script
       run: ./package.json
-      working-directory: /home/runner/work/test-repo/.github
+      working-directory: /home/runner/work/test-repo/*
 
     - name: Run a one-line script
       run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
