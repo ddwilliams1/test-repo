@@ -36,8 +36,8 @@ jobs:
     - name: Display directory structure
       run: ls -la /home/runner/work/test-repo/*
 
-    - name: Set execute permissions on script
-      run: chmod 777 ./package.json
+    #- name: Set execute permissions on script
+      #run: chmod 777 ./package.json
 
     - name: Run a script
       run:  package.json
