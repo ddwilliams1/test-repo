@@ -43,18 +43,18 @@ jobs:
       #run:  ./package.json
       #working-directory: /home/runner/work/test-repo
 
-    - name: Set up Node.js 20.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.x'
+    #- name: Set up Node.js 20.x
+      #uses: actions/setup-node@v3
+      #with:
+        #node-version: '20.x'
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./
+    #- name: Install dependencies
+      #run: npm install
+      #working-directory: ./
 
     #- name: Run build
       #run: npm run build
-      working-directory: ./
+      #working-directory: ./
 
     #- name: Run tests
       #run: npm test
