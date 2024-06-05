@@ -40,7 +40,7 @@ jobs:
       run: chmod 777 ./package.json
 
     - name: Run a script
-      run: ./package.json
+      run:  package.json
       working-directory: /home/runner/work/test-repo
 
     - name: Set up Node.js 20.x
