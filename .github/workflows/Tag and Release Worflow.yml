@@ -4,6 +4,17 @@ on:
 	pull_request:
 	types:
 		- open
+                - closed
+
+        workflow_dispatch:
+          inputs:
+            environment:
+              description: 'Which environment to deploy to'
+              required: true
+              default: 'Production'
+              type: choice
+              options:
+                - Re-Run Job
 
 jobs:
 	release:
