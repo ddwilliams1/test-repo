@@ -1,9 +1,9 @@
 name: Tag and Release Workflow
 
 on:
-	pull_request, push:
+	pull_request, push, closed:
 	types:
-		- open
+		- push
                 - closed
 
 workflow_dispatch:
@@ -15,7 +15,6 @@ workflow_dispatch:
               type: choice
               options:
                 - Re-Run Job
-		- Production
 
 jobs:
 	release:
