@@ -9,7 +9,7 @@ on:
       run_reason:
        description: 'Add button to manually Re-run the Action'
        required: true
-       default: 'Maual Re-run Action'
+       default: 'Re-run Action'
 
 jobs:
   send_email:
