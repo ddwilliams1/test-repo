@@ -1,0 +1,40 @@
+name: Send Email on Pull Request
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+         node-version: [20.x]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Send email
+      uses: derick.williams1/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 465
+        username: derick.williams1@nara.gov
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: 'New Issue Opened: ${{ github.event.issue.title }}'
+        body: |
+          A new issue has been opened in the repository:
+          Repository: ${{ github.repository }}
+          Issue Title: ${{ github.event.issue.title }}
+          Issue Body: ${{ github.event.issue.body }}
+          Issue URL: ${{ github.event.issue.html_url }}
+        to: derick.williams1@nara.gov
+        from: derick.williams1@nara.gov
+        #secure: true
+        #priority: high
