@@ -15,6 +15,7 @@ workflow_dispatch:
               type: choice
               options:
                 - Re-Run Job
+		- Production
 
 jobs:
 	release:
