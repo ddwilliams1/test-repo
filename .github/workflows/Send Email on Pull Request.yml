@@ -4,12 +4,12 @@ on:
   pull_request:
     types: [opened]
 
-  workflow_dispatch:
-    inputs:
-      run_reason:
-       description: 'Add button to manually Re-run the Action'
-       required: true
-       default: 'Maual Re-run Action'
+  #workflow_dispatch:
+    #inputs:
+      #run_reason:
+       #description: 'Add button to manually Re-run the Action'
+       #required: true
+       #default: 'Maual Re-run Action'
 
 jobs:
   send_email:
