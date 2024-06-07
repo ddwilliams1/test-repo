@@ -6,10 +6,13 @@ on:
 
   workflow_dispatch:
     inputs:
-      run_reason:
+      reason:
        description: 'Add button to manually Re-run the Action'
        required: true
-       default: 'Maual Re-run Action  
+       default: 'Re-run Action'
+       type: choice
+       options:
+        - Re-run Action
 
 jobs:
   send_email:
