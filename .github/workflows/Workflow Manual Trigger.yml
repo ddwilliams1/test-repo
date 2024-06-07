@@ -1,0 +1,34 @@
+name: Manual Trigger Example
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Which environment to deploy to'
+        required: true
+        default: 'Production'
+        type: choice
+        options:
+          - Production
+          - Development
+          - CAT
+          - UAT
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Display directory structure
+      run: ls -la /home/runner/work/test-repo/*
+
+    #- name: Run a script
+      #run: ./package.json
+      #working-directory: /home/runner/work/test-repo
+
+    #- name: Run a one-line script
+      #run: echo "Deploying to ${{ github.event.inputs.environment }} environment"
+     
