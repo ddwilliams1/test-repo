@@ -24,21 +24,39 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+       node-version: [22.2.0]
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+     - name: Checkout repository
+       uses: actions/setup-node@v3
+
+     - name: Setup Node.js ${{ matrix.node-version }}
+       uses: actions/setup-node@v3
+       with:
+         node-version: ${{ matrix.node-version }}
+
+     - name: Install dependencies
+       run: npm install
+
+     - name: Run tests
+       run: npm test
+    
+    #- name: Checkout repository
+       #uses: actions/checkout@v3
       
-    - name: Set environment variables
-      run: echo "NODE_ENV=production" >> $GITHUB_ENV
+     - name: Set environment variables
+       run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
-    - name: Add Node.js to PATH
-      run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH
+     - name: Add Node.js to PATH
+       run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH
 
-    - name: Display directory structure
-      run: ls -la /home/runner/work/test-repo/*
+     - name: Display directory structure
+       run: ls -la /home/runner/work/test-repo/*
 
-    #- name: Set execute permissions on script
-      #run: chmod 777 ./package.json
+     - name: Set execute permissions on script
+       run: chmod 777 ./package.json
 
     #- name: Run a script
       #run:  ./package.json
