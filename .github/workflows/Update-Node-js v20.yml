@@ -26,7 +26,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2.217.0
+      uses: actions/checkout@v2.317.0
       
     - name: Set environment variables
       run: echo "NODE_ENV=production" >> $GITHUB_ENV
