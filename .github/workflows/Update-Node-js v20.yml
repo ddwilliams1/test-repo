@@ -15,9 +15,10 @@ on:
         default: 'Production'
         type: choice
         options:
-          - CAT
-          - UAT
           - PRODUCTION
+          - UAT
+          - CAT
+          - DEVELOPMENT
 
 jobs:
   build:
