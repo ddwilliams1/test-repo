@@ -39,7 +39,7 @@ jobs:
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: 'New Issue Opened: ${{ github.event.issue.title }}'
         body: |
-          A new issue has been opened in the repository:
+          A new Issue has been opened in the repository:
           Repository: ${{ github.repository }}
           Issue Title: ${{ github.event.issue.title }}
           Issue Body: ${{ github.event.issue.body }}
