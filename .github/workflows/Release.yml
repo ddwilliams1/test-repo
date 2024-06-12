@@ -2,6 +2,15 @@
 name: 'Release Process'
 
 on: [pull_request, push]
+  workflow_dispatch:  
+    inputs:
+      environment:
+        description: 'Run this Action Manually'
+        required: true
+        default: 'Re-run Action'
+        #type: choice
+        options:
+          - Re-run Action
 
 jobs:
   release:
@@ -21,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "14"
+          node-version: "22.2.0"
       - run: npm install
       - name: Configure git
         run: |
