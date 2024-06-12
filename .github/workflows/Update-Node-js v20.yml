@@ -50,17 +50,17 @@ jobs:
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
      - name: Add Node.js to PATH
-       run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH
+       run: echo "/home/runner/work/.github/test-repo" >> $GITHUB_PATH
 
      - name: Display directory structure
-       run: ls -la /home/runner/work/test-repo/*
+       run: ls -la /home/runner/work/.github/test-repo/*
 
      - name: Set execute permissions on script
        run: chmod 777 ./package.json
 
-    #- name: Run a script
-      #run:  ./package.json
-      #working-directory: /home/runner/work/test-repo
+     - name: Run a script
+       run:  ./package.json
+       working-directory: /home/runner/work/.github/test-repo
 
     #- name: Set up Node.js 20.x
       #uses: actions/setup-node@v3
