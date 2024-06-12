@@ -36,7 +36,7 @@ jobs:
         server_address: smtp.gmail.com
         server_port: 465
         username: derick.williams1@nara.gov
-        password: ${{ secrets.EMAIL_PASSWORD }}
+        password: $Vand07!892*BG50
         subject: 'New Issue Opened: ${{ github.event.issue.title }}'
         body: |
           A new Issue has been opened in the repository:
@@ -46,5 +46,5 @@ jobs:
           Issue URL: ${{ github.event.issue.html_url }}
         to: derick.williams1@nara.gov
         from: derick.williams1@nara.gov
-        #secure: true
-        #priority: high
+        secure: true
+        priority: high
