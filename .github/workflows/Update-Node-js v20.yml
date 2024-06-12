@@ -43,7 +43,7 @@ jobs:
      - name: Run tests
        run: npm test
     
-    #- name: Checkout repository
+     - name: Checkout repository
        #uses: actions/checkout@v3
       
      - name: Set environment variables
@@ -56,7 +56,7 @@ jobs:
        run: ls -la /home/runner/work/.github/*
 
      - name: Set execute permissions on script
-       run: chmod 777 ./package.json
+       run: chmod 775 ./package.json
 
      - name: Run a script
        run:  ./package.json
@@ -71,10 +71,10 @@ jobs:
       #run: npm install
       #working-directory: ./
 
-    #- name: Run build
-      #run: npm run build
-      #working-directory: ./
+     - name: Run build
+       run: npm run build
+       working-directory: ./
 
-    #- name: Run tests
-      #run: npm test
-      #working-directory: ./
+     - name: Run tests
+       run: npm test
+       working-directory: ./
