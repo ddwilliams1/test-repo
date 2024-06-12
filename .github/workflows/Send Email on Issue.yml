@@ -35,7 +35,7 @@ jobs:
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: derick.williams1@nara.gov
+        username: ddwilliams1
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: 'New Issue Opened: ${{ github.event.issue.title }}'
         body: |
