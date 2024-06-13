@@ -30,27 +30,27 @@ jobs:
 
     steps:
      - name: Checkout repository
-       uses: actions/setup-node@v4
+       uses: actions/setup-node@v2
 
-     - name: Setup Node.js ${{ matrix.node-version }}
-       uses: actions/setup-node@v4
+     - name: Setup Node.js 22.x
+       uses: actions/setup-node@v3
        with:
-         node-version: ${{ matrix.node-version }}
+         node-version: '22.x'
 
-     - name: Add Node.js to PATH
-       run: echo "/home/runner/work/Github/test-repo" >> $GITHUB_PATH    
+     #- name: Add Node.js to PATH
+       #run: echo "/home/runner/work/Github/test-repo" >> $GITHUB_PATH    
 
      - name: Install dependencies
        run: npm install
-       working-directory: /home/runner/work/Github/test-repo/package.json
+       #working-directory: /home/runner/work/Github/test-repo/package.json
 
      - name: Run build
        run: npm run build
-       working-directory: /home/runner/work/Github/test-repo
+       #working-directory: /home/runner/work/Github/test-repo
 
      - name: Run tests
        run: npm test
-       working-directory: /home/runner/work/Github/test-repo
+       #working-directory: /home/runner/work/Github/test-repo
       
      - name: Set environment variables
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
