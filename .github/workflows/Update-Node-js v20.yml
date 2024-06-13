@@ -38,19 +38,19 @@ jobs:
          node-version: ${{ matrix.node-version }}
 
      - name: Add Node.js to PATH
-       run: echo "/home/runner/work/.github" >> $GITHUB_PATH    
+       run: echo "/home/runner/work/Github/test-repo" >> $GITHUB_PATH    
 
      - name: Install dependencies
        run: npm install
-       working-directory: /home/runner/work/.github/package.json
+       working-directory: /home/runner/work/Github/test-repo/package.json
 
      - name: Run build
        run: npm run build
-       working-directory: /home/runner/work/.github
+       working-directory: /home/runner/work/Github/test-repo
 
      - name: Run tests
        run: npm test
-       working-directory: /home/runner/work/.github
+       working-directory: /home/runner/work/Github/test-repo
       
      - name: Set environment variables
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
