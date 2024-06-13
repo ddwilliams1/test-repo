@@ -42,15 +42,15 @@ jobs:
 
      - name: Install dependencies
        run: npm install
-       working-directory: /home/runner
+       working-directory: /github.com/ddwilliams1/test-repo/blob/main/.github/package.json
 
      - name: Run build
        run: npm run build
-       working-directory: /home/runner
+       working-directory: /github.com/ddwilliams1/test-repo/blob/main/.github/package.json
 
      - name: Run tests
        run: npm test
-       working-directory: /home/runner
+       working-directory: /github.com/ddwilliams1/test-repo/blob/main/.github/package.json
       
      - name: Set environment variables
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
