@@ -50,14 +50,14 @@ jobs:
        run: echo "/home/runner/work/test-repo/.github" >> $GITHUB_PATH
 
      - name: Display directory structure
-       run: ls -la /home/runner/work/test-repo/.github/*
+       run: ls -la /home/runner/work/test-repo/*
 
      - name: Set execute permissions on script
        run: chmod 775 ./package.json
 
      - name: Run a script
        run:  ./package.json
-       working-directory: /home/runner/work/test-repo/.github
+       working-directory: /home/runner/work/test-repo/
 
     #- name: Set up Node.js 20.x
       #uses: actions/setup-node@v3
