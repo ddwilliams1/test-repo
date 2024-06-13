@@ -37,29 +37,29 @@ jobs:
        with:
          node-version: '22.x'
 
-     #- name: Add Node.js to PATH
-       #run: echo "/home/runner/work/Github/test-repo" >> $GITHUB_PATH    
+     - name: Add Node.js to PATH
+       run: echo "/home/runner/work/ddwilliams1/test-repo/.github" >> $GITHUB_PATH    
 
      - name: Install dependencies
        run: npm install
-       #working-directory: /home/runner/work/Github/test-repo/package.json
+       working-directory: /home/runner/work/ddwilliams1/test-repo/.github
 
      - name: Run build
        run: npm run build
-       #working-directory: /home/runner/work/Github/test-repo
+       working-directory: /home/runner/work/ddwilliams/test-repo/.github
 
      - name: Run tests
        run: npm test
-       #working-directory: /home/runner/work/Github/test-repo
+       working-directory: /home/runner/work/ddwilliams1/test-repo/.github/*
       
      - name: Set environment variables
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
      - name: Display directory structure
-       run: ls -la /home/runner/work/.github/*
+       run: ls -la /home/runner/work/ddwilliams1/test-repo/.github/*
 
      - name: Set execute permissions on script
-       run: chmod 775 package.json
+       run: chmod 775 /home/runner/work/ddwilliams2/test-repo/.github/package.json
 
      #- name: Run a script
        #run:  ./package.json
