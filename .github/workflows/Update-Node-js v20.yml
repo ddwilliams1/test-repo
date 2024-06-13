@@ -38,7 +38,7 @@ jobs:
          node-version: ${{ matrix.node-version }}
 
      - name: Add Node.js to PATH
-       run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH    
+       run: echo "/home/runner/work" >> $GITHUB_PATH    
 
      - name: Install dependencies
        run: npm install
@@ -50,7 +50,7 @@ jobs:
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
      - name: Display directory structure
-       run: ls -la /home/runner/work/test-repo/.github/*
+       run: ls -la /home/runner/work/*
 
      - name: Set execute permissions on script
        run: chmod 775 ./package.json
