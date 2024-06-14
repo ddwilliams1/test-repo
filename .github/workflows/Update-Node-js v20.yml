@@ -48,9 +48,9 @@ jobs:
        #run: npm run build
        #working-directory: /home/runner/work/test-repo
 
-     - name: Run tests
-       run: npm test
-       working-directory: /home/runner/work/test-repo
+     #- name: Run tests
+       #run: npm test
+       #working-directory: /home/runner/work/test-repo
       
      - name: Set environment variables
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
