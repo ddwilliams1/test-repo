@@ -61,7 +61,7 @@ jobs:
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
      - name: Display directory structure
-       run: ls -la /home/runner/work/test-repo/.git/*
+       run: ls -la /home/runner/work/test-repo/test-repo/*
 
      - name: Send email notification
        if: ${{ success() }}
