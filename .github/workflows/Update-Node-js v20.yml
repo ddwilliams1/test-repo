@@ -58,6 +58,23 @@ jobs:
      - name: Display directory structure
        run: ls -la /home/runner/work/test-repo/*
 
+     - name: Send email notification
+       if: ${{ success() }}
+       uses: dawidd6/action-send-mail@v3
+       with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: Script Succeeded - ${{ github.repository }}
+        to: derick.williams1@nara.gov
+        from: notifications@github.com
+        body: |
+          The script for ${{ github.repository }} has "SUCCEEDED."
+          Branch: ${{ github.ref }}
+          Commit: ${{ github.sha }}
+          Please check the logs for more details.  
+
      #- name: Set execute permissions on script
        #run: chmod 775 /home/runner/work/test-repo/.github/package.json
 
