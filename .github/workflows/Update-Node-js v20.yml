@@ -61,24 +61,24 @@ jobs:
        run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
      - name: Display directory structure
-       run: ls -la /home/runner/work/test-repo/*
+       run: ls -la /home/runner/work/*
 
-     - name: Send email notification
-       if: ${{ success() }}
-       uses: dawidd6/action-send-mail@v3
-       with:
-        server_address: smtp.gmail.com
-        server_port: 465 #587
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: Script Succeeded - ${{ github.repository }}
-        to: derick.williams1@nara.gov
-        from: notifications@github.com
-        body: |
-          The script for ${{ github.repository }} has "SUCCEEDED."
-          Branch: ${{ github.ref }}
-          Commit: ${{ github.sha }}
-          Please check the logs for more details.  
+     #- name: Send email notification
+       #if: ${{ success() }}
+       #uses: dawidd6/action-send-mail@v3
+       #with:
+        #server_address: smtp.gmail.com
+        #server_port: 465 #587
+        #username: ${{ secrets.EMAIL_USERNAME }}
+        #password: ${{ secrets.EMAIL_PASSWORD }}
+        #subject: Script Succeeded - ${{ github.repository }}
+        #to: derick.williams1@nara.gov
+        #from: notifications@github.com
+        #body: |
+          #The script for ${{ github.repository }} has "SUCCEEDED."
+          #Branch: ${{ github.ref }}
+          #Commit: ${{ github.sha }}
+          #Please check the logs for more details.  
 
      #- name: Set execute permissions on script
        #run: chmod 775 /home/runner/work/test-repo/.github/package.json
