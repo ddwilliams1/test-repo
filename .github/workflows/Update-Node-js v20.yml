@@ -37,8 +37,8 @@ jobs:
        with:
          node-version: '22.x'
 
-     - name: Add Node.js to PATH
-       run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH    
+     #- name: Add Node.js to PATH
+       #run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH    
 
      - name: Install dependencies
        run: npm install
