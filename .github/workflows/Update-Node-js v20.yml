@@ -69,8 +69,8 @@ jobs:
        with:
         server_address: smtp.gmail.com
         server_port: 587
-        username: ${{ secrets.SMTP_USERNAME }}
-        password: ${{ secrets.SMTP_PASSWORD }}
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
         subject: Script Succeeded - ${{ github.repository }}
         to: derick.williams1@nara.gov
         from: notifications@github.com
