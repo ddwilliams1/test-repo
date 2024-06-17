@@ -1,0 +1,45 @@
+
+name: 'Release Process'
+
+on: [pull_request, push]
+  workflow_dispatch:  
+    inputs:
+      environment:
+        description: 'Run this Action Manually'
+        required: true
+        default: 'Re-run Action'
+        #type: choice
+        options:
+          - Re-run Action
+
+jobs:
+  release:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          allowed-endpoints:
+            github.com:443
+            api.github.com:443
+            objects.githubusercontent.com:443
+            raw.githubusercontent.com:443
+            registry.npmjs.org:443
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.2.0"
+      - run: npm install
+      - name: Configure git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git fetch --unshallow --tags -f || git fetch --tags -f
+      - name: Attempt `make release` process
+        run: echo proceed | make TAG=99.99.99 release
+        env:
+          GIT_EDITOR: "sed -i '1 s/^/99.99.99 make release test/'"
+      - name: Ensure tag is created
+        run: git tag | grep v99.99.99
