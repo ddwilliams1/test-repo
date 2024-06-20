@@ -41,7 +41,7 @@ jobs:
           Issue Title: ${{ github.event.pull_request.title }}
           Issue Body: ${{ github.event.pull_request.body }}
           Issue URL: ${{ github.event.pull_request.html_url }}
-        to: derick.williams1@nara.gov
-        from: derick.williams1@nara.gov
+        to: ${{ secrets.EMAIL_USERNAME }}
+        from: ${{ secrets.SSH_PRIVATE_KEY }}
         #secure: true
         #priority: high
