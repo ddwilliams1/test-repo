@@ -65,6 +65,6 @@ jobs:
           Issue Body: ${{ github.event.issue.body }}
           Issue URL: ${{ github.event.issue.html_url }}
         to: Derick.Williams1@nara.gov
-        from: ${{ secrets.EMAIL_USERNAME }}
+        from: Derick.Williams1@nara.gov
         secure: true
         priority: high
