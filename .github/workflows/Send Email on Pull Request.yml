@@ -26,6 +26,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Set up Email Credentials
+      run: |
+        echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+        echo "email_password=${{ secrets.SSH_PRIVATE_KEY }}" >> $GITHUB_ENV
     
     - name: Send email
       uses: action-send-mail@v3
