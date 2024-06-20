@@ -10,52 +10,96 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Production'
+        description: 'Execute Action'
         required: true
-        default: 'Production'
+        default: 'PRODUCTION'
         type: choice
         options:
-          - CAT
-          - UAT
           - PRODUCTION
+          - UAT
+          - CAT
+          - DEVELOPMENT
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+       node-version: [22.2.0]
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+     - name: Checkout repository
+       uses: actions/setup-node@v3
+
+     - name: Setup Node.js 22.x
+       uses: actions/setup-node@v3
+       with:
+         node-version: '22.x'
+
+     - name: Set up Email Credentials
+       run: |
+        echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+        echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV
+
+     #- name: Add Node.js to PATH
+       #run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH    
+
+     #- name: Install dependencies
+       #run: npm install
+       #working-directory: /home/runner/work/test-repo
+
+     #- name: Run build
+       #run: npm run build
+       #working-directory: /home/runner/work/test-repo
+
+     #- name: Run tests
+       #run: npm test
+       #working-directory: /home/runner/work/test-repo
       
-    - name: Set environment variables
-      run: echo "NODE_ENV=production" >> $GITHUB_ENV
+     - name: Set environment variables
+       run: echo "NODE_ENV=production" >> $GITHUB_ENV
 
-    - name: Add Node.js to PATH
-      run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH
+     - name: Display directory structure
+       run: ls -la /home/runner/work/*
 
-    - name: Display directory structure
-      run: ls -la /home/runner/work/test-repo/*
+     #- name: Send email notification
+       #if: ${{ success() }}
+       #uses: dawidd6/action-send-mail@v3
+       #with:
+        #server_address: smtp.gmail.com
+        #server_port: 465 #587
+        #username: ${{ secrets.EMAIL_USERNAME }}
+        #password: ${{ secrets.EMAIL_PASSWORD }}
+        #subject: Script Succeeded - ${{ github.repository }}
+        #to: derick.williams1@nara.gov
+        #from: notifications@github.com
+        #body: |
+          #The script for ${{ github.repository }} has "SUCCEEDED."
+          #Branch: ${{ github.ref }}
+          #Commit: ${{ github.sha }}
+          #Please check the logs for more details.  
 
-    - name: Set execute permissions on script
-      run: chmod 777 ./package.json
+     #- name: Set execute permissions on script
+       #run: chmod 775 /home/runner/work/test-repo/.github/package.json
 
-    - name: Run a script
-      run:  package.json
-      working-directory: /home/runner/work/test-repo
+     #- name: Run a script
+       #run:  ./package.json
+       #working-directory: /home/runner/work/test-repo
 
-    - name: Set up Node.js 20.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.x'
+    #- name: Set up Node.js 20.x
+      #uses: actions/setup-node@v3
+      #with:
+        #node-version: '20.x'
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./
+    #- name: Install dependencies
+      #run: npm install
+      #working-directory: ./
 
-    - name: Run build
-      run: npm run build
-      working-directory: ./
+     #- name: Run build
+       #run: npm run build
+       #working-directory: ./
 
-    - name: Run tests
-      run: npm test
-      working-directory: ./
+     #- name: Run tests
+       #run: npm test
+       #working-directory: ./
