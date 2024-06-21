@@ -22,14 +22,14 @@ jobs:
   send_email:
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Send Email
-      env:
-       EMAIL: ${{ secrets.EMAIL }}
-       PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-      run: |
-       echo "Sending email..."
-       echo -e "Subject" Test Email\n\nThis is a test email." | sendmail -S smtp.gmail.com:465 -au"$EMAIL" -ap"$PASSWORD" Derick.Williams1@nara.gov
+    #steps:
+    #- name: Send Email
+      #env:
+       #EMAIL: ${{ secrets.EMAIL }}
+       #PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      #run: |
+       #echo "Sending email..."
+       #echo -e "Subject" Test Email\n\nThis is a test email." | sendmail -S smtp.gmail.com:465 -au"$EMAIL" -ap"$PASSWORD" Derick.Williams1@nara.gov
 
     strategy:
       matrix:
