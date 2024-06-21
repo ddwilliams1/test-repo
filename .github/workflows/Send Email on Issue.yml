@@ -48,7 +48,7 @@ jobs:
     - name: Set up Email Credentials
       run: |
         echo "email_username=${{ secrets.EMAIL_USERNAME }}" $GITHUB_ENV
-        echo "email_password=${{ secrets.SSH_PRIVATE_KEY }}" $GITHUB_ENV    
+        echo "email_password=${{ secrets.EMAIL_PASSWORD }}" $GITHUB_ENV    
     
     - name: Send email
       uses: dawidd6/action-send-mail@v3
@@ -56,7 +56,7 @@ jobs:
         server_address: smtp.gmail.com
         server_port: 465 #587
         username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.SSH_PRIVATE_KEY }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
         subject: 'New Issue Opened: ${{ github.event.issue.title }}'
         body: |
           A new Issue has been opened in the repository:
@@ -65,6 +65,6 @@ jobs:
           Issue Body: ${{ github.event.issue.body }}
           Issue URL: ${{ github.event.issue.html_url }}
         to: ${{ secrets.EMAIL_USERNAME }}
-        from: ${{ secrets.SSH_PRIVATE_KEY }}
+        from: ${{ secrets.EMAIL_PASSWORD }}
         secure: true
         priority: high
