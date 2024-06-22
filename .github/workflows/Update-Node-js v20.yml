@@ -10,9 +10,9 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Production'
+        description: 'Execute Action'
         required: true
-        default: 'Production'
+        default: 'PRODUCTION'
         type: choice
         options:
           - PRODUCTION

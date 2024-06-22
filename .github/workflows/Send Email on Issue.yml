@@ -54,7 +54,7 @@ jobs:
       uses: dawidd6/action-send-mail@v3
       with:
         server_address: smtp.gmail.com
-        server_port: 465  #587  #465
+        server_port: 587  #465
         username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.SSH_PRIVATE_KEY }}
         subject: 'New Issue Opened: ${{ github.event.issue.title }}'
@@ -65,6 +65,6 @@ jobs:
           Issue Body: ${{ github.event.issue.body }}
           Issue URL: ${{ github.event.issue.html_url }}
         to: derick.williams1@nara.gov
-        from: smtp.gmail.com
+        from: ${{ secrets.EMAIL_USERNAME }}
         secure: true
         priority: high
