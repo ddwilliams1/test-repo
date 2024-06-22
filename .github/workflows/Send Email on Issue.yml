@@ -75,5 +75,5 @@ jobs:
           Issue URL: ${{ github.event.issue.html_url }}
         to: ${{ secrets.EMAIL_USERNAME }}
         from: ${{ secrets.EMAIL_PASSWORD }}
-        secure: false
+        secure: true
         priority: high
