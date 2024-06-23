@@ -7,7 +7,7 @@ on:
     inputs:
       environment:
       name: CAT
-      #url: 
+      #url: 'http://...  '
       description: 'Ready for Release to Production'
       required: true
       default: 'Re-run Action'
