@@ -40,7 +40,7 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 465
-          username: Derick.Williams@nara.gov #'${{ secrets.EMAIL_USERNAME }}'
+          username: Derick.Williams1@nara.gov #'${{ secrets.EMAIL_USERNAME }}'
           password: Peraton#792791 #'${{ secrets.SSH_PRIVATE_KEY }}'
           subject: 'New Issue Opened: ${{ github.event.issue.title }}'
           body: |
@@ -49,7 +49,7 @@ jobs:
             Issue Title: ${{ github.event.issue.title }}
             Issue Body: ${{ github.event.issue.body }}
             Issue URL: ${{ github.event.issue.html_url }}
-          to: Derick.Williams@nara.gov #'${{ secrets.EMAIL_USERNAME }}'
-          from: Derick.Williams@nara.gov #'${{ secrets.EMAIL_PASSWORD }}'
+          to: Derick.Williams1@nara.gov #'${{ secrets.EMAIL_USERNAME }}'
+          from: Derick.Williams1@nara.gov #'${{ secrets.EMAIL_PASSWORD }}'
           secure: true
           priority: high
