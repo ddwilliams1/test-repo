@@ -41,8 +41,8 @@ jobs:
         with:
           server_address: smtp.gmail.com
           server_port: 587 #465
-          username: Derick.Williams1@nara.gov #'${{ secrets.EMAIL_USERNAME }}'
-          password: Peraton#792791 #'${{ secrets.SSH_PRIVATE_KEY }}'
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.SSH_PRIVATE_KEY }}
           subject: 'New Issue Opened: ${{ github.event.issue.title }}'
           body: |
             A new Issue has been opened in the repository:
@@ -50,7 +50,7 @@ jobs:
             Issue Title: ${{ github.event.issue.title }}
             Issue Body: ${{ github.event.issue.body }}
             Issue URL: ${{ github.event.issue.html_url }}
-          to: Derick.Williams1@nara.gov #'${{ secrets.EMAIL_USERNAME }}'
-          from: Derick.Williams1@nara.gov #'${{ secrets.EMAIL_PASSWORD }}'
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_USERNAME }}
           secure: true
           priority: high
