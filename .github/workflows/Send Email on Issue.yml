@@ -37,7 +37,7 @@ jobs:
           echo "email_password=${{ secrets.SSH_PRIVATE_KEY }}" >> $GITHUB_ENV  
           echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
       - name: Send email
-        uses: hilarion5/send-mail@v1 #dawidd6/action-send-mail@v3
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
