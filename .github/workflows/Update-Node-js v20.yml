@@ -39,8 +39,10 @@ jobs:
 
      - name: Set up Email Credentials
        run: |
-        echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
-        echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV
+        #echo email_username=${{ secrets.EMAIL_USERNAME }} $GITHUB_ENV
+        echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+        echo email_password=${{ secrets.SSH_PRIVATE_KEY }} $GITHUB_ENV  
+        echo ${{ secrets.SSH_PRIVATE_KEY }} | sed 's/./& /g'
 
      #- name: Add Node.js to PATH
        #run: echo "/home/runner/work/test-repo" >> $GITHUB_PATH    

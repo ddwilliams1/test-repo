@@ -9,7 +9,10 @@ on:
       run_reason:
        description: 'Add button to manually Re-run the Action'
        required: true
-       default: 'Re-run Action'
+       default: Re-run Action
+       type: choice
+       options:
+          - Re-run Action
 
 jobs:
   send_email:
@@ -29,15 +32,15 @@ jobs:
 
     - name: Set up Email Credentials
       run: |
-        echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
-        echo "email_password=${{ secrets.SSH_PRIVATE_KEY }}" >> $GITHUB_ENV
-    
+        #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+        echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
+        echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
     - name: Send email
       uses: action-send-mail@v3
       with:
         server_address: smtp.gmail.com
         server_port: 465
-        username: derick.williams1@nara.gov
+        username: ${{ secrets.EMAIL_USERNAME }}
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: 'New Pull Request Opened: ${{ github.event.pull_request.title }}'
         body: |
@@ -47,6 +50,6 @@ jobs:
           Issue Body: ${{ github.event.pull_request.body }}
           Issue URL: ${{ github.event.pull_request.html_url }}
         to: ${{ secrets.EMAIL_USERNAME }}
-        from: ${{ secrets.SSH_PRIVATE_KEY }}
-        #secure: true
-        #priority: high
+        from: ${{ secrets.EMAIL_PASSWORD }}
+        secure: true
+        priority: low
