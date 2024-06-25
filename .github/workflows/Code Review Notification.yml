@@ -1,0 +1,26 @@
+
+name: Code Review Notification
+on:
+  pull_request:
+    types: [opened, reopened, closed, edited, review_requested]
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: derick.williams1@nara.gov
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Code Review Notification"
+          to: derick.williams1@nara.gov  
+          from: "derick.williams1@nara.gov"  
+          body: |
+            A pull request has been made to the repository.
+            Repository: ${{ github.repository }}
+            Pull Request: ${{ github.event.pull_request.html_url }}
+            Author: ${{ github.event.pull_request.user.login }}
+            Pull Request Number: ${{ github.event.pull_request.number }}
+            Pull Request Title: ${{ github.event.pull_request.title }}
