@@ -26,6 +26,11 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
+    - name: Set up Email Credentials
+      run: |
+        echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+        echo "email_password=${{ secrets.SSH_PRIVATE_KEY }}" >> $GITHUB_ENV
     
     - name: Send email
       uses: action-send-mail@v3
@@ -41,7 +46,7 @@ jobs:
           Issue Title: ${{ github.event.pull_request.title }}
           Issue Body: ${{ github.event.pull_request.body }}
           Issue URL: ${{ github.event.pull_request.html_url }}
-        to: derick.williams1@nara.gov
-        from: derick.williams1@nara.gov
+        to: ${{ secrets.EMAIL_USERNAME }}
+        from: ${{ secrets.SSH_PRIVATE_KEY }}
         #secure: true
         #priority: high
