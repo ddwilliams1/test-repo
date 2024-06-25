@@ -28,28 +28,29 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
-
+          node-version: 22.2.0
+    - name: Install dependencies
+      run: npm install
     - name: Set up Email Credentials
       run: |
-        #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
-         #echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
-         #echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+          #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
+          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
     - name: Send email
       uses: dawidd6/action-send-mail@v3
       with:
-         server_address: smtp.gmail.com
-         server_port: 465
-         username: ${{ secrets.EMAIL_USERNAME }}
-         password: ${{ secrets.EMAIL_PASSWORD }}
-         subject: 'New Pull Request Opened: ${{ github.event.pull_request.title }}'
-         body: |
-           A new Pull Request has been opened in the repository:
-           Repository: ${{ github.repository }}
-           Issue Title: ${{ github.event.pull_request.title }}
-           Issue Body: ${{ github.event.pull_request.body }}
-           Issue URL: ${{ github.event.pull_request.html_url }}
-         to: ${{ secrets.EMAIL_USERNAME }}
-         from: ${{ secrets.EMAIL_PASSWORD }}
-         secure: true
-         priority: low
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'New Issue Opened: ${{ github.event.issue.title }}'
+          body: |
+            A new Issue has been opened in the repository:
+            Repository: ${{ github.repository }}
+            Issue Title: ${{ github.event.issue.title }}
+            Issue Body: ${{ github.event.issue.body }}
+            Issue URL: ${{ github.event.issue.html_url }}
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+          secure: true
+          priority: high
