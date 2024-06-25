@@ -2,7 +2,9 @@ name: Send Email on Pull Request
 
 on:
   push:
-    branches: -dev
+    branches: 
+      - dev
+      - 'releases/**'
 
   workflow_dispatch:
     inputs:
