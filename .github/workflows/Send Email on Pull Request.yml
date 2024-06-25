@@ -43,13 +43,13 @@ jobs:
           server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: 'New Issue Opened: ${{ github.event.issue.title }}'
+          subject: 'New Issue Opened: ${{ github.event.pull_request.title }}'
           body: |
-            A new Issue has been opened in the repository:
+            A new Pull Request has been opened in the repository:
             Repository: ${{ github.repository }}
-            Issue Title: ${{ github.event.issue.title }}
-            Issue Body: ${{ github.event.issue.body }}
-            Issue URL: ${{ github.event.issue.html_url }}
+            Pull Request Title: ${{ github.event.pull_request.title }}
+            Issue Body: ${{ github.event.pull_request.body }}
+            Issue URL: ${{ github.event.pull_request.html_url }}
           to: ${{ secrets.EMAIL_USERNAME }}
           from: ${{ secrets.EMAIL_USERNAME }}
           secure: true
