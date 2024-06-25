@@ -1,0 +1,56 @@
+name: Send Email on Issue
+'on':
+  issues:
+    types:
+      - opened
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: Add button to manually Re-run the Action
+        required: true
+        default: Re-run Action
+        type: choice
+        options:
+          - Re-run Action
+concurrency:
+  group: 'ci-${{ github.ref }}'
+  cancel-in-progress: true
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.2.0
+      - name: Install dependencies
+        run: npm install
+      - name: Set up Email Credentials
+        run: |
+          #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
+          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'New Issue Opened: ${{ github.event.issue.title }}'
+          body: |
+            A new Issue has been opened in the repository:
+            Repository: ${{ github.repository }}
+            Issue Title: ${{ github.event.issue.title }}
+            Issue Body: ${{ github.event.issue.body }}
+            Issue URL: ${{ github.event.issue.html_url }}
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+          secure: true
+          priority: high
