@@ -10,15 +10,12 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Execute Action'
+        description: 'Re-run Action'
         required: true
-        default: 'PRODUCTION'
+        default: 'Re-run Action'
         type: choice
         options:
-          - PRODUCTION
-          - UAT
-          - CAT
-          - DEVELOPMENT
+          - Re-run Action
 
 jobs:
   build:
