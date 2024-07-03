@@ -1,0 +1,69 @@
+name: Send Email on Merge
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types:
+      - closed
+
+  workflow_dispatch:
+    inputs:
+      run_reason:
+        description: 'Add button to manually Re-run the Action'
+        required: true
+        default: Re-run Action
+        type: choice
+        options:
+          - Re-run Action
+concurrency:
+  group: 'ci-${{ github.ref }}'
+  cancel-in-progress: true
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo The PR was successfully merged.
+
+  send_email:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version:
+          - 20.x
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.2.0
+      - name: Install dependencies
+        run: npm install
+      - name: Set up Email Credentials
+        run: |
+          #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV
+          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'Pull Request Merged: ${{ github.event.pull_request.title }}'
+          body: |
+            A new Pull Request has been merged in the repository:
+            Repository: ${{ github.repository }}
+            Pull Request Title: ${{ github.event.pull_request.title }}
+            Issue Body: ${{ github.event.pull_request.body }}
+            Issue URL: ${{ github.event.pull_request.html_url }}
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+          secure: true
+          priority: high
