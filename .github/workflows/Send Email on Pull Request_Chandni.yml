@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - dev
+      - CM Prod Release DW
     types:
       - closed
 
