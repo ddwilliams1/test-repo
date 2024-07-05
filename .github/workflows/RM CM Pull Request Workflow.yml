@@ -20,6 +20,12 @@ on:
 jobs:
   label_and_notify:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: 
+         - 22.2.0
+         
     steps:
      - name: Checkout repository
        uses: actions/checkout@v3
