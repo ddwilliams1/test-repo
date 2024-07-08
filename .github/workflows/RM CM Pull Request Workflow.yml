@@ -3,6 +3,10 @@ name: RM CM Pull Request Workflow
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    branches:
+    - main
+    - develop
+    - CM Production Releases
   push:
     tags:
       - 'v*.*.*'
