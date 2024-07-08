@@ -8,13 +8,13 @@ on:
 
 workflow_dispatch:
           inputs:
-            environment:
-              description: 'Which environment to deploy to'
-              required: true
-              default: 'Production'
-              type: choice
-              options:
-                - Re-Run Job
+            reason:
+            description: Add button to manually Re-run the Action
+            required: true
+            default: Re-run Action
+            type: choice
+            options:
+            - Re-run Action
 
 jobs:
 	release:
