@@ -6,10 +6,10 @@ on:
     branches:
     - main
     - dev
-    - CM Production Releases
+    - CM Production Release v*.*.*.*
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*.*.*.*'
       
   workflow_dispatch:
     inputs:
@@ -61,8 +61,8 @@ jobs:
           server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: 'New CM Pull Request Opened'
-          body: 'A new pull request has been opened: ${{ github.event.pull_request.html_url }}'
+          subject: 'New Pull Request Opened'
+          body: 'A New Pull Request has been Opened: ${{ github.event.pull_request.html_url }}'
           to: ${{ secrets.EMAIL_USERNAME }}
           from: ${{ secrets.EMAIL_USERNAME }}
 
@@ -94,6 +94,6 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'New Release Created'
-          body: 'A new release has been created: ${{ steps.create_release.outputs.html_url }}'
+          body: 'A New Project Release has been Created: ${{ steps.create_release.outputs.html_url }}'
           to: ${{ secrets.EMAIL_USERNAME }}
           from: ${{ secrets.EMAIL_USERNAME }}
