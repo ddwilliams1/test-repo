@@ -25,10 +25,7 @@ jobs:
   label_and_notify:
     runs-on: ubuntu-latest
     steps:
-      - uses "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: true
+      - uses: "marvinpinto/action-automatic-release@latest"
 
     #strategy:
       #matrix:
