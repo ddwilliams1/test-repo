@@ -37,8 +37,8 @@ jobs:
        uses: actions/setup-node@v3
        with:
          node-version: 22.2.0
-     - name: Install dependencies
-       run: npm install
+     #- name: Install dependencies
+       #run: npm install
 
      - name: Label the pull request
        if: github.event_name == 'pull_request'
