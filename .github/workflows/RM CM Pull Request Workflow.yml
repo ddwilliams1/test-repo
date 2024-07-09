@@ -24,8 +24,6 @@ on:
 jobs:
   label_and_notify:
     runs-on: ubuntu-latest
-    steps:
-      - uses: "marvinpinto/action-automatic-release@latest"
 
     #strategy:
       #matrix:
