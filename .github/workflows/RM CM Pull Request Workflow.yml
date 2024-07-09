@@ -6,7 +6,7 @@ on:
     branches:
     - main
     - dev
-    - CM Production Release v*.*.*.*
+    - Release v*.*.*.*
   push:
     tags:
       - 'v*.*.*.*'
