@@ -25,27 +25,27 @@ jobs:
   label_and_notify:
     runs-on: ubuntu-latest
 
-    #strategy:
-      #matrix:
-        #node-version: [22.2.0]
-         #- 22.2.0
+    strategy:
+      matrix:
+        node-version: #[22.2.0]
+         - 22.2.0
          
     steps:
      - name: Checkout repository
        uses: actions/checkout@v3
-     #- name: Setup Node.js
-       #uses: actions/setup-node@v3
-       #with:
-         #node-version: 22.2.0
-     #- name: Install dependencies
-       #run: npm install
+     - name: Setup Node.js
+       uses: actions/setup-node@v3
+       with:
+         node-version: 22.2.0
+     - name: Install dependencies
+       run: npm install
 
      - name: Label the pull request
        if: github.event_name == 'pull_request'
        uses: actions-ecosystem/action-add-labels@v1
        with:
-        node-version: 22.2.0
-        labels: 'CM review-needed'
+        node-version: "22.2.0"
+        #labels: 'CM review-needed'
 
      - name: Set up Email Credentials
        run: |
@@ -95,5 +95,5 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'New Release Created'
           body: 'A New Project Release has been Created: ${{ steps.create_release.outputs.html_url }}'
-          to: ${{ secrets.EMAIL_USERNAME }}
+          to: ${{ secrets.EMAIL_USERNAME }}, janice.cobb@nara.gov
           from: ${{ secrets.EMAIL_USERNAME }}
