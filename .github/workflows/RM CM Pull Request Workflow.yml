@@ -5,7 +5,6 @@ on:
     types: [opened, synchronize, reopened]
     branches:
     - main
-    - dev
     - Release v*.*.*.*
   push:
     tags:
@@ -61,9 +60,9 @@ jobs:
           server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: 'New Pull Request Opened'
+          subject: 'Ready for CM Review - Ops Deploy Release to Production'
           body: 'A New Pull Request has been Opened: ${{ github.event.pull_request.html_url }}'
-          to: ${{ secrets.EMAIL_USERNAME }}
+          to: janice.cobb@nara.gov, derick.williams1@nara.gov
           from: ${{ secrets.EMAIL_USERNAME }}
 
   create_release:
