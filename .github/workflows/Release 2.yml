@@ -4,6 +4,8 @@ name: Release
 # Run on every commit tag which begins with "v" (e.g., "v24.1.1.0")
 on: 
   push:
+    branches:
+      - main
     tags:
       - "v*"
 
@@ -23,7 +25,21 @@ jobs:
     name: "Release"
     runs-on: "ubuntu-latest"
     steps:
+      - name: "Ready for Ops Deploy to Prod"
+        run: |
+          echo "CM Review Complete"
+        
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token : "{{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Project Release"
+          files: |
+            *.txt
+            *.docx
+            *.pdf
+            *.jar
+            *.yml
+            
+          
