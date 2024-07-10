@@ -7,6 +7,16 @@ on:
     tags:
       - "v*"
 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Re-Run Action'
+        required: true
+        default: 'Re-run Action'
+        type: choice
+        options:
+          - Re-Run Action
+
 # Automatically create a GitHub Release, with release details specified (then relevant commits)
 jobs:
   release:
