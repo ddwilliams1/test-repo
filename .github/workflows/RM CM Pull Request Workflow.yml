@@ -20,9 +20,9 @@ on:
         options:
           - Re-Run Action
 
-jobs:
-  label_and_notify:
-    runs-on: ubuntu-latest
+#jobs:
+  #label_and_notify:
+    #runs-on: ubuntu-latest
 
     #strategy:
       #matrix:
