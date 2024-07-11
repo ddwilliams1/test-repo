@@ -10,5 +10,4 @@ Updated to v24.5.1.0 for upcoming release.
 
 Test Create Release Versions - DW
 
-July 9, 2024.
-
+Today is July 11, 2024.
