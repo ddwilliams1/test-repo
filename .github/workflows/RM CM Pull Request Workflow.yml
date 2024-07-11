@@ -95,4 +95,4 @@ jobs:
           subject: 'New Release Created'
           body: 'A New Project Release has been Created: ${{ steps.create_release.outputs.html_url }}'
           to: ${{ secrets.EMAIL_USERNAME }}
-          from: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_USERNAME }}, janice.cobb@nara.gov, seema.dheman@nara.gov
