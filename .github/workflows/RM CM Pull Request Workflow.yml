@@ -1,0 +1,98 @@
+name: RM CM Pull Request Workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+    - main
+    - Release v*.*.*.*
+  push:
+    tags:
+      - 'v*.*.*.*'
+      
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Re-Run Action'
+        required: true
+        default: 'Re-run Action'
+        type: choice
+        options:
+          - Re-Run Action
+
+jobs:
+   label_and_notify:
+     runs-on: ubuntu-latest
+
+     strategy:
+      matrix:
+        node-version:
+         - 22.2.0
+         
+     steps:
+     - name: Checkout repository
+       uses: actions/checkout@v3
+     - name: Setup Node.js
+       uses: actions/setup-node@v3
+       with:
+         node-version: 22.2.0
+     #- name: Install dependencies
+       #run: npm install
+
+     - name: Label the pull request
+       if: github.event_name == 'pull_request'
+       uses: actions-ecosystem/action-add-labels@v1
+       #with:
+        #node-version: "22.2.0"
+        #labels: 'CM review-needed'
+
+     - name: Set up Email Credentials
+       run: |
+          #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
+          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+
+     - name: Send email notification on pull request
+       if: github.event_name == 'pull_request'
+       uses: dawidd6/action-send-mail@v3
+       with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'Ready for CM Review - Ops Deploy Release to Production'
+          body: 'A New Pull Request has been Opened: ${{ github.event.pull_request.html_url }}'
+          to: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov
+          from: ${{ secrets.EMAIL_USERNAME }}
+
+   create_release:
+    runs-on: ubuntu-latest
+    needs: label_and_notify
+    #if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }} #${{ github.ref }}
+          release_name: Release ${{ github.run_number }} #Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Send email notification on release
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'New Release Created'
+          body: 'A New Project Release has been Created: ${{ steps.create_release.outputs.html_url }}'
+          to: ${{ secrets.EMAIL_USERNAME }}
+          from: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov
