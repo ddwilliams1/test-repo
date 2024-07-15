@@ -62,7 +62,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'Ready for CM Review - Ops Deploy Release to Production'
           body: 'A New Pull Request has been Opened: ${{ github.event.pull_request.html_url }}'
-          to: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov
+          to: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov #janice.cobb@nara.gov, #seema.dheman@nara.gov
           from: ${{ secrets.EMAIL_USERNAME }}
 
    create_release:
@@ -95,4 +95,4 @@ jobs:
           subject: 'Release Ready for Ops Deploy - PROD'
           body: 'A New Project Release is Ready for Ops Production Deployment: ${{ steps.create_release.outputs.html_url }}'
           to: ${{ secrets.EMAIL_USERNAME }}
-          from: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov
+          from: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov #janice.cobb@nara.gov, #seema.dheman@nara.gov
