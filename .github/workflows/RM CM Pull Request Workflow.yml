@@ -8,7 +8,7 @@ on:
     - Release v*.*.*.*
   push:
     tags:
-      - 'v*.*.*.*'
+      - '*'
       
   workflow_dispatch:
     inputs:
@@ -81,7 +81,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.run_number }} #${{ github.ref }}
-          release_name: Release ${{ github.run_number }} #Release ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }} #Release ${{ github.ref }}
           draft: false
           prerelease: false
 
