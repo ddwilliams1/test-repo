@@ -6,9 +6,9 @@ on:
     branches:
       #- main
       - Release v*.*.*.*
-  #push:
-    #tags:
-      #- v*.*.*.*
+  push:
+   tags:
+      - v*.*.*.*
 
   workflow_dispatch:
     inputs:
