@@ -1,0 +1,57 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Re-Run Action'
+        required: true
+        default: 'Re-run Action'
+        type: choice
+        options:
+          - Re-Run Action
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: path/to/your/asset.zip
+          asset_name: asset.zip
+          asset_content_type: application/zip
+
+      - name: Send email notification on release
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'New Release Created: ${{ github.ref_name }}'
+          body: 'A new release has been created: ${{ steps.create_release.outputs.html_url }}'
+          to: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov
+          from: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov
