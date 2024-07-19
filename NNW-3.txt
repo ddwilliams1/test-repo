@@ -1,7 +1,0 @@
-July 17, 2024.
-
-jobs:
-  label_and_notify:
-    runs-on: ubuntu-latest
-  - name: Run eslint with warnings supressed
-    run: npx eslint . --quiet
