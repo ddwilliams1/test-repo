@@ -1,0 +1,45 @@
+# Name of the Workflow
+name: Release
+
+# Run on every commit tag which begins with "v" (e.g., "v24.1.1.0")
+on: 
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Re-Run Action'
+        required: true
+        default: 'Re-run Action'
+        type: choice
+        options:
+          - Re-Run Action
+
+# Automatically create a GitHub Release, with release details specified (then relevant commits)
+jobs:
+  release:
+    name: "Release"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Ready for Ops Deploy to Prod"
+        run: |
+          echo "CM Review Complete"
+        
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token : "{{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Project Release"
+          files: |
+            *.txt
+            *.docx
+            *.pdf
+            *.jar
+            *.yml
+            
+          
