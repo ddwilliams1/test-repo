@@ -29,8 +29,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.2.0
-      - name: Install dependencies
-        run: npm install
+      #- name: Install dependencies
+        #run: npm install
       - name: Set up Email Credentials
         run: |
           #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
