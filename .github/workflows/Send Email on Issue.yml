@@ -29,8 +29,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.2.0
-      - name: Install dependencies
-        run: npm install
+      #- name: Install dependencies
+        #run: npm install
       - name: Set up Email Credentials
         run: |
           #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
@@ -45,7 +45,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'New Issue Opened: ${{ github.event.issue.title }}'
           body: |
-            A new Issue has been opened in the repository:
+            A New Issue Has Been Opened in the Repository:
             Repository: ${{ github.repository }}
             Issue Title: ${{ github.event.issue.title }}
             Issue Body: ${{ github.event.issue.body }}
