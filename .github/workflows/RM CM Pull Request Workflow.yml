@@ -8,7 +8,7 @@ on:
       - Release v*.*.*.*
   push:
    tags:
-      - v*.*.*.*
+      - "v*" #v*.*.*.*
 
   workflow_dispatch:
     inputs:
