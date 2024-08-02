@@ -1,2 +1,2 @@
-Hello world!
-Release v24.8.2.0.0
+Testing
+Release v24.8.2.0.2
