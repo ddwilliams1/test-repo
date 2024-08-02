@@ -7,15 +7,15 @@ on:
       - main
       - Release v*.*.*.*
   push:
-   tags:
-      - "v*" #v*.*.*.*
+    tags:
+      - 'v*' #v*.*.*.*
 
   workflow_dispatch:
     inputs:
       environment:
-        description: "Re-Run Action"
+        description: 'Re-Run Action'
         required: true
-        default: "Re-run Action"
+        default: 'Re-run Action'
         type: choice
         options:
           - Re-Run Action
@@ -36,11 +36,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22.2.0
-      #- name: Install dependencies
-      #run: npm install
-         
-      #- name: Label the pull request
+        #- name: Install dependencies
+        #run: npm install
+
+        #- name: Label the pull request
         #if: github.event_name == 'pull_request'
+        if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
         #uses: actions-ecosystem/action-add-labels@v1
         #with:
         #node-version: "22.2.0"
@@ -53,17 +54,19 @@ jobs:
           echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
 
       #- name: Send email notification on pull request
-        #if: github.event_name == 'pull_request'
-        #uses: dawidd6/action-send-mail@v3
-        #with:
-          #server_address: smtp.gmail.com
-          #server_port: 465
-          #username: ${{ secrets.EMAIL_USERNAME }}
-          #password: ${{ secrets.EMAIL_PASSWORD }}
-          #subject: "Ready for CM Review - Ops Deploy Release to Production"
-          #body: "A New Pull Request has been Opened: ${{ github.event.pull_request.html_url }}"
-          #to: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov #janice.cobb@nara.gov, #seema.dheman@nara.gov
-          #from: ${{ secrets.EMAIL_USERNAME }}
+      
+      #if: github.event_name == 'pull_request'
+       if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+      #uses: dawidd6/action-send-mail@v3
+      #with:
+      #server_address: smtp.gmail.com
+      #server_port: 465
+      #username: ${{ secrets.EMAIL_USERNAME }}
+      #password: ${{ secrets.EMAIL_PASSWORD }}
+      #subject: "Ready for CM Review - Ops Deploy Release to Production"
+      #body: "A New Pull Request has been Opened: ${{ github.event.pull_request.html_url }}"
+      #to: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov #janice.cobb@nara.gov, #seema.dheman@nara.gov
+      #from: ${{ secrets.EMAIL_USERNAME }}
 
   create_release:
     runs-on: ubuntu-latest
@@ -92,7 +95,7 @@ jobs:
           server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "CM: NARA Project Release Ready for Ops Deploy - PROD"
-          body: "A NARA Project Release is ready for Ops Deployment to PROD environment: ${{ steps.create_release.outputs.html_url }}"
+          subject: 'CM: NARA Project Release Ready for Ops Deploy - PROD'
+          body: 'A NARA Project Release is ready for Ops Deployment to PROD environment: ${{ steps.create_release.outputs.html_url }}'
           to: ${{ secrets.EMAIL_USERNAME }} Chandni.Bedi@nara.gov #janice.cobb@nara.gov, #seema.dheman@nara.gov, #Chandni.Bedi@nara.gov
           from: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov
