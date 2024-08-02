@@ -41,7 +41,7 @@ jobs:
 
         #- name: Label the pull request
         #if: github.event_name == 'pull_request'
-        if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+        if: ${{ ! startsWith(github.ref, 'refs/tags/' || github.ref_name == 'main') }}
         #uses: actions-ecosystem/action-add-labels@v1
         #with:
         #node-version: "22.2.0"
@@ -52,11 +52,9 @@ jobs:
           #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
           echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
           echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
-
       #- name: Send email notification on pull request
-      
+
       #if: github.event_name == 'pull_request'
-       if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
       #uses: dawidd6/action-send-mail@v3
       #with:
       #server_address: smtp.gmail.com
