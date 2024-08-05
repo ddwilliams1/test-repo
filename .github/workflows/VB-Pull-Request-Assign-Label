@@ -1,0 +1,50 @@
+name: Pull Request Assign Label
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - Release v*.*.*.*
+      - dev
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Re-Run Action'
+        required: true
+        default: 'Re-run Action'
+        type: choice
+        options:
+          - Re-Run Action
+
+jobs:
+  label_and_notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Label the pull request
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: 'CM review-needed'
+
+      - name: Set up Email Credentials
+        run: |
+          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV
+          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+
+      - name: Send email notification on pull request
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'New Pull Request for Review'
+          body: 'A new pull request has been opened: ${{ github.event.pull_request.html_url }}'
+          to: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov
+          from: ${{ secrets.EMAIL_USERNAME }}, Chandni.Bedi@nara.gov
