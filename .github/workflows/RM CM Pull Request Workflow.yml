@@ -52,8 +52,8 @@ jobs:
           #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
           echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
           echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+      
       #- name: Send email notification on pull request
-
       #if: github.event_name == 'pull_request'
       #uses: dawidd6/action-send-mail@v3
       #with:
@@ -81,7 +81,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.run_number }} #${{ github.ref }}
+          tag_name: ${{ github.run_number }} #${{ github.ref }} #"${{ env.ver }}"
           release_name: Release ${{ github.run_number }} #Release ${{ github.ref }}
           draft: false
           prerelease: false
@@ -105,5 +105,5 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'CM: NARA Project Release Ready for Ops Deploy - PROD'
           body: 'A NARA Project Release is ready for Ops Deployment to PROD environment: ${{ steps.create_release.outputs.html_url }}'
-          to: ${{ secrets.EMAIL_USERNAME }} #Chandni.Bedi@nara.gov #janice.cobb@nara.gov, #seema.dheman@nara.gov
+          to: ${{ secrets.EMAIL_USERNAME }}, janice.cobb@nara.gov, seema.dheman@nara.gov, #Chandni.Bedi@nara.gov
           from: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov
