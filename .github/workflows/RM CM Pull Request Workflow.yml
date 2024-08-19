@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - main
-      - Release-v*.*.*.*
+      - Release v*.*.*.*
   push:
     tags:
       - 'v*' #v*.*.*.*
