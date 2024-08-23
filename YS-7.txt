@@ -1,10 +1,1 @@
-On branch dev
-Your branch is up to date with 'origin/dev'.
-
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git restore <file>..." to discard changes in working directory)
-	modified:   YS-6.txt
-	modified:   YS-7.txt
-
-no changes added to commit (use "git add" and/or "git commit -a")
+Today is August 23, 2024. Files for Release 1.5.3.0
