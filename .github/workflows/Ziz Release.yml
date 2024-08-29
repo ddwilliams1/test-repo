@@ -15,10 +15,12 @@ on:
         default: 'Re-run Action'
         type: choice
         options:
-          - Re-Run Action    
+          - Re-Run Action              
 
 # Automatically create a GitHub Release, with release details specified (the relevant commits)
 jobs:
+  label_and_notify:
+    runs-on: ubuntu-latest
   release:
     name: "Release"
     runs-on: "ubuntu-latest"
