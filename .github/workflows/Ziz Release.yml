@@ -29,6 +29,12 @@ jobs:
         with:
           node-version: 22.2.0
 
+      - name: Set up Email Credentials
+        run: |
+          #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
+          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+  
   release:
     name: "Release"
     runs-on: "ubuntu-latest"
@@ -36,13 +42,7 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
-
-      - name: Set up Email Credentials
-        run: |
-          #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
-          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
-          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'          
+          prerelease: false          
 
       - name: Send email notification on release
         uses: dawidd6/action-send-mail@v3
