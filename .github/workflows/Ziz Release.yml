@@ -1,0 +1,58 @@
+# Name of the workflow
+name: Ziz Release
+
+# Run on every commit tag which begins with "v" (e.g., "v0.1.4")
+on:
+  push:
+    tags:
+      - "v*"  
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Re-Run Action'
+        required: true
+        default: 'Re-run Action'
+        type: choice
+        options:
+          - Re-Run Action              
+
+# Automatically create a GitHub Release, with release details specified (the relevant commits)
+jobs:
+  label_and_notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.2.0
+
+      - name: Set up Email Credentials
+        run: |
+          #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
+          echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
+          echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
+  
+  release:
+    name: "Release"
+    runs-on: "ubuntu-latest"
+    needs: label_and_notify
+    steps:
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false          
+
+      - name: Send email notification on release
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'CM: NARA Project Release Ready for Ops Deploy - PROD'
+          body: 'A NARA Project Release is ready for Ops Deployment to PROD environment: ${{ steps.create_release.outputs.html_url }}'
+          to: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov, #Sherli.Nambiar@nara.gov #Chandni.Bedi@nara.gov
+          from: ${{ secrets.EMAIL_USERNAME }}, #janice.cobb@nara.gov, #seema.dheman@nara.gov
