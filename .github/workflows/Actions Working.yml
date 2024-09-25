@@ -85,6 +85,14 @@ jobs:
           VERSION_NUMBER=$(echo "${{ env.PR_DESCRIPTION }}" | grep -oP 'Tag: \K[^\s]+')
           echo $VERSION_NUMBER
           echo "VERSION_NUMBER=$VERSION_NUMBER" >> $GITHUB_ENV
+
+      - name: Validate Version Number
+        if: github.event_name == 'pull_request'
+        run: |
+          if [[ ! "${{ env.VERSION_NUMBER }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid version number format. Expected format: vMAJOR.MINOR.PATCH"
+            exit 1
+          fi
           
       - name: Create GitHub Release
         id: create_release
