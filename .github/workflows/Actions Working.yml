@@ -44,7 +44,14 @@ jobs:
           #echo "email_username=${{ secrets.EMAIL_USERNAME }}" >> $GITHUB_ENV
           echo "email_password=${{ secrets.EMAIL_PASSWORD }}" >> $GITHUB_ENV  
           echo ${{ secrets.EMAIL_USERNAME }} | sed 's/./& /g'
-      
+
+  build_code: 
+     needs: label_and_notify
+     uses: ./.github/workflows/build.yml  
+
+  deploy_code:
+     needs: label_and_notify
+     uses: ./.github/workflows/deploy.yml
 
   create_release:
     runs-on: ubuntu-latest
