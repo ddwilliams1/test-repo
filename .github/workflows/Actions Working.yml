@@ -55,7 +55,7 @@ jobs:
 
   create_release:
     runs-on: ubuntu-latest
-    needs: label_and_notify
+    needs: build_code
     permissions:
       actions: write
       attestations: write
