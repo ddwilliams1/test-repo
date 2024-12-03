@@ -2,7 +2,7 @@ name: Actions Working Release Asset
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, published]
     branches:
       - main
       - Release v*.*.*.*
