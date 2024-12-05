@@ -1,6 +1,9 @@
 name: Actions Working Release Asset
 
 on:
+  schedule:
+      - cron: '35 9 * * 4' #set to run at 9:30am (30 9 * * *); #see website https://crontab.guru/ to create the job
+
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
