@@ -4,3 +4,13 @@ on:
   schedule:
   #set cron to run at 9:30am ('30 9 * * *); #see website https://crontab.guru/ to create cron jobs
     - cron: '55 9 * * 4'
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Re-Run Action'
+        required: true
+        default: 'Re-run Action'
+        type: choice
+        options:
+          - Re-Run Action
