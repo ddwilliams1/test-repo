@@ -14,3 +14,13 @@ on:
         type: choice
         options:
           - Re-Run Action
+
+jobs:
+ build-and-test:
+  runs-on: ubuntu latest
+
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+ 
