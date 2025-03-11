@@ -1,2 +1,4 @@
+AA-7.txt
+Release Version 25.2.1.0
 Testing the updated email distribution for Configuration Management
 Release Version 25.2.1.0
