@@ -5,8 +5,8 @@ Lead Developer:
 - Creates Pull Requests to the main branch (e.g., release branch), and ensures proper descriptions for Title, Tag to trigger the GitHub Actions automation
 
 NOTE: All tags must follow “Semantic Versioning” guidelines (e.g., Major.Minor.Build). 
--	Pull Request Title: Project Name and Release Version (e.g. Project Name Release ##.#.#.#, EOP-45 Release 24.1.1.0)
--	Pull Request Description format: Tag: v##.#.#.# (Tag: v24.1.1.0)
+-	Pull Request Title: Project Name and Release Version ##.#.#.# (e.g., ERA 2.0 Release 24.1.1.0)
+-	Pull Request Description format: Tag: v##.#.#.# (e.g., Tag: v24.1.1.0)
 
 Project(s) with Subproject(s) 
 Project_SubProject_XX.Y.Z.Za
