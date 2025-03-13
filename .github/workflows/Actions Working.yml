@@ -124,4 +124,4 @@ jobs:
           body: 'A NARA Project Release is ready for Ops Deployment to PROD environment: ${{ steps.create_release.outputs.html_url }}'
           to: derick.williams1@nara.gov, janice.cobb@nara.gov #${{ secrets.EMAIL_USERNAME }}, derick.williams1@nara.gov, janice.cobb@nara.gov, seema.dheman@nara.gov, #Sherli.Nambiar@nara.gov, #Chandni.Bedi@nara.gov
           from: QA_configmgt@nara.gov #${{ secrets.EMAIL_USERNAME }} #janice.cobb@nara.gov, #seema.dheman@nara.gov, #QA_configmgt@nara.gov
-          cc: derick.williams1@nara.gov
+          cc: derick.williams1@nara.gov # Add CC addresses here, comma separated
