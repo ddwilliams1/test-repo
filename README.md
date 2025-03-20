@@ -21,5 +21,5 @@ Where:
 | **Subproject** | AAD, BASE, ADIS, NAC, DAS, CRI, EOP-43, EOP-44 OPA for ERA and PERL, ADDRESS and URTS for NDC, etc.                                            |
 |     **XX**     | The last two digits of the current calendar year.                                                                                              |
 |      **Y**     | The Release Number (e.g. 1, 2, 3…, …10, 11, 12, etc.) This number is assigned in incrementing order and corresponds to new major developments. |
-|     **Z.Z**    | The Iterative Build Number, e.g. 0.0, 1.0, 2.0 (Major Build), or 1.1, 1.2 (Minor Build)                                                        |
-|      **a**     | Denotes an Emergency change                                                                                                                    |
+|     **Z.Z**    | The Iterative Build Number, e.g. 0.0, 1.0, 2.0 (Major Build), or 1.1, 1.2 (Minor Build).                                                       |
+|      **a**     | Denotes an Emergency change.                                                                                                                   |
