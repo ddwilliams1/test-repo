@@ -1,6 +1,9 @@
-name: Actions Working
+name: Actions Working Release Asset
 
 on:
+  schedule:
+      - cron: '35 9 * * 4' #set to run at 9:30am (30 9 * * *); #see website https://crontab.guru/ to create the job
+
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
@@ -96,11 +99,10 @@ jobs:
       - name: Validate Version Number
         if: github.event_name == 'pull_request'
         run: |
-          #if [[ ! "${{ env.VERSION_NUMBER }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-          if [[ ! "${{ env.VERSION_NUMBER }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ ! "${{ env.VERSION_NUMBER }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "Invalid version number format. Expected format: vMAJOR.MINOR.PATCH"
             exit 1
-          fi
+          fi   
           
       - name: Create GitHub Release
         id: create_release
@@ -113,6 +115,17 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        with:
+          #upload_url: '${{ steps.create_release.outputs.upload_url }}'
+          asset_path: ./.github/workflows/attachment.txt #./my-artifact.zip
+          asset_name: attachment.txt #my-artifact.zip
+          asset_content_type: application/txt #application/zip
+
       - name: Send email notification on release
         uses: dawidd6/action-send-mail@v3
         with:
@@ -122,5 +135,5 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: 'CM: NARA Project Release Ready for Ops Deploy - PROD'
           body: 'A NARA Project Release is ready for Ops Deployment to PROD environment: ${{ steps.create_release.outputs.html_url }}'
-          to: derick.williams1@nara.gov, janice.cobb@nara.gov #${{ secrets.EMAIL_USERNAME }}, derick.williams1@nara.gov, janice.cobb@nara.gov, seema.dheman@nara.gov, #Sherli.Nambiar@nara.gov, #Chandni.Bedi@nara.gov
-          from: QA_configmgt@nara.gov #${{ secrets.EMAIL_USERNAME }} #janice.cobb@nara.gov, #seema.dheman@nara.gov, #QA_configmgt@nara.gov
+          to: ${{ secrets.EMAIL_USERNAME }} #janice.cobb@nara.gov, seema.dheman@nara.gov, Sherli.Nambiar@nara.gov, Chandni.Bedi@nara.gov
+          from: ${{ secrets.EMAIL_USERNAME }} #janice.cobb@nara.gov, #seema.dheman@nara.gov
